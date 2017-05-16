@@ -1,44 +1,50 @@
 $(document).ready(function () {
 
-    // VARIABLES
     var calc = $('.calculator');
-    var calcDisplay = calc.find('.calculator__display');
-    var calcKeys = calc.find('.calculator__key');
-    var calcButton = calc.find('.calculator__button');
-    var calcClear = calc.find('.calculator__clear');
-    var calcEqual = calc.find('.calculator__key--equal');
-    var calcPower = calc.find('.calculator__power');
-    var calcSpace = calc.find('.calculator__backspace');
+    var display = calc.find('#display');
+    var button = calc.find(".key__item_number-action");
+    var clear = calc.find('#C');
+    var equal = calc.find('#equal');
+    var del = calc.find('#Del');
 
-    // INIT CALC KEYS
-    calcKeys.each(function () {
-        var current = $(this).attr('value');
-        $(this).text(current);
+    // добавление цифр и действий
+    button.on('click', function () {
+        display.val( display.val() + $(this).attr('value') );
     });
 
-    // ADD NUMBERS TO INPUT
-    calcButton.on('click', function () {
-        calcDisplay.val( calcDisplay.val() + $(this).attr('value') );
+    // полная очистка
+    clear.on('click', function () {
+        display.val('');
     });
 
-    // CLEAR INPUT
-    calcClear.on('click', function () {
-        calcDisplay.val('');
+    // вычислить результат
+    equal.on('click', function () {
+        // 1000000000/100000000 для нормального вывода 0.1+0.2(и других)
+        display.val( Math.round(eval(display.val())* 10000000000) / 10000000000);
     });
 
-    // SHOW RESULT
-    calcEqual.on('click', function () {
-        calcDisplay.val( eval( calcDisplay.val() ) );
+    // удалить последний символ
+    del.on('click', function () {
+        display.val( display.val().substring(0, display.val().length-1) );
     });
 
-    // POWER BUTTON
-    calcPower.on('click', function () {
-        calcDisplay.val( Math.pow( calcDisplay.val(), 3 ) );
-    });
-
-    // BACKSPACE BUTTON
-    calcSpace.on('click', function () { // http://www.w3schools.com/jsref/jsref_substring.asp
-        calcDisplay.val( calcDisplay.val().substring(0, calcDisplay.val().length-1) );
-    });
-
+    // event.type должен быть keypress
+    getChar = function (event) {
+        if (event.which == null) { // IE
+            if (event.keyCode > 39 && event.keyCode < 58 && event.keyCode != 44) {
+                return; // цифры и действия
+            } else if (event.keyCode == 13 || event.keyCode == 61){
+                display.val( Math.round(eval(display.val())* 10000000000) / 10000000000);
+            }
+            return event.preventDefault()
+        }
+        if (event.which != 0 && event.charCode != 0) { // все кроме IE
+            if (event.which > 39 && event.which < 58 && event.which != 44) {
+                return; // цифры и действия
+            } else if (event.which == 13 || event.which == 61){
+                display.val( Math.round(eval(display.val())* 10000000000) / 10000000000);
+            }
+            return event.preventDefault();
+        }
+    };
 });
