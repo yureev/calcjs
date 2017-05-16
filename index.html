@@ -11,21 +11,24 @@
     <form class="calculator">
         <div class="calculator__wrapper">
             <div class="calc__input">
-                <input title="display" class="calc__input-display" id="display" type="text"  onkeypress="getChar(event)"/>
+                <input title="display" class="calc__input-display" id="display"
+                       type="text"  onkeypress="getChar(event)"
+                       autofocus maxlength="22"
+                />
             </div>
             <div class="keyboards">
                 <ul class="key__list">
                     <li class="key__item">
-                        <button type="button" value="c" class="key__item_button" id="C">C</button>
+                        <button type="button" value="c" class="key__item_button key__item_service" id="C">C</button>
                     </li>
                     <li class="key__item">
-                        <button type="button" value="(" class="key__item_button key__item_number-action" id="power">(</button>
+                        <button type="button" value="(" class="key__item_button key__item_number-action key__item_service" id="power">(</button>
                     </li>
                     <li class="key__item">
-                        <button type="button" value=")" class="key__item_button key__item_number-action" id="power2">)</button>
+                        <button type="button" value=")" class="key__item_button key__item_number-action key__item_service" id="power2">)</button>
                     </li>
                     <li class="key__item">
-                        <button type="button" value="+" class="key__item_button key__item_number-action" id="+">+</button>
+                        <button type="button" value="+" class="key__item_button key__item_number-action key__item_action" id="+">+</button>
                     </li>
                     <li class="key__item">
                         <button type="button" value="7" class="key__item_button key__item_number-action" id="7">7</button>
@@ -37,7 +40,7 @@
                         <button type="button" value="9" class="key__item_button key__item_number-action" id="9">9</button>
                     </li>
                     <li class="key__item">
-                        <button type="button" value="-" class="key__item_button key__item_number-action" id="-">-</button>
+                        <button type="button" value="-" class="key__item_button key__item_number-action key__item_action" id="-">-</button>
                     </li>
                     <li class="key__item">
                         <button type="button" value="4" class="key__item_button key__item_number-action" id="4">4</button>
@@ -49,7 +52,7 @@
                         <button type="button" value="6" class="key__item_button key__item_number-action" id="6">6</button>
                     </li>
                     <li class="key__item">
-                        <button type="button" value="*" class="key__item_button key__item_number-action" id="*">*</button>
+                        <button type="button" value="*" class="key__item_button key__item_number-action key__item_action" id="*">*</button>
                     </li>
                     <li class="key__item">
                         <button type="button" value="1" class="key__item_button key__item_number-action" id="1">1</button>
@@ -61,7 +64,7 @@
                         <button type="button" value="3" class="key__item_button key__item_number-action" id="3">3</button>
                     </li>
                     <li class="key__item">
-                        <button type="button" value="/" class="key__item_button key__item_number-action" id="/">/</button>
+                        <button type="button" value="/" class="key__item_button key__item_number-action key__item_action" id="/">/</button>
                     </li>
                     <li class="key__item">
                         <button type="button" value="0" class="key__item_button key__item_number-action" id="0">0</button>
@@ -69,63 +72,15 @@
                     <li class="key__item">
                         <button type="button" value="." class="key__item_button key__item_number-action" id=".">.</button>
                     </li>
-
                     <li class="key__item">
-                        <button type="button" value="<&#45;&#45;" class="key__item_button" id="Del">Del</button>
+                        <button type="button" value="<&#45;&#45;" class="key__item_button key__item_service" id="Del">Del</button>
                     </li>
                     <li class="key__item">
-                        <button type="button" value="=" class="key__item_button" id="equal">=</button>
+                        <button type="button" value="=" class="key__item_button key__item_action" id="equal">=</button>
                     </li>
                 </ul>
             </div>
         </div>
     </form>
-
-
-
-    <!--&lt;!&ndash; CALCULATOR &ndash;&gt;-->
-    <!--<div class="calculator">-->
-        <!--&lt;!&ndash; CALCULATOR FORM &ndash;&gt;-->
-        <!--<form class="calculator__form">-->
-            <!--&lt;!&ndash; CALCULATOR ROW &ndash;&gt;-->
-            <!--<div class="calculator__row">-->
-                <!--<input class="calculator__display" id="display" type="text" disabled />-->
-            <!--</div>-->
-            <!--&lt;!&ndash; CALCULATOR ROW &ndash;&gt;-->
-            <!--<div class="calculator__row">-->
-                <!--<button type="button" value="c" class="calculator__key calculator__clear"></button>-->
-                <!--<button type="button" value="<&#45;&#45;" class="calculator__key calculator__backspace"></button>-->
-                <!--<button type="button" value="^3" class="calculator__key calculator__power"></button>-->
-                <!--<button type="button" value="+" class="calculator__key calculator__button"></button>-->
-            <!--</div>-->
-            <!--&lt;!&ndash; CALCULATOR ROW &ndash;&gt;-->
-            <!--<div class="calculator__row">-->
-                <!--<button type="button" value="9" class="calculator__key calculator__button"></button>-->
-                <!--<button type="button" value="8" class="calculator__key calculator__button"></button>-->
-                <!--<button type="button" value="7" class="calculator__key calculator__button"></button>-->
-                <!--<button type="button" value="-" class="calculator__key calculator__button"></button>-->
-            <!--</div>-->
-            <!--&lt;!&ndash; CALCULATOR ROW &ndash;&gt;-->
-            <!--<div class="calculator__row">-->
-                <!--<button type="button" value="6" class="calculator__key calculator__button"></button>-->
-                <!--<button type="button" value="5" class="calculator__key calculator__button"></button>-->
-                <!--<button type="button" value="4" class="calculator__key calculator__button"></button>-->
-                <!--<button type="button" value="*" class="calculator__key calculator__button"></button>-->
-            <!--</div>-->
-            <!--&lt;!&ndash; CALCULATOR ROW &ndash;&gt;-->
-            <!--<div class="calculator__row">-->
-                <!--<button type="button" value="3" class="calculator__key calculator__button"></button>-->
-                <!--<button type="button" value="2" class="calculator__key calculator__button"></button>-->
-                <!--<button type="button" value="1" class="calculator__key calculator__button"></button>-->
-                <!--<button type="button" value="/" class="calculator__key calculator__button"></button>-->
-            <!--</div>-->
-            <!--&lt;!&ndash; CALCULATOR ROW &ndash;&gt;-->
-            <!--<div class="calculator__row">-->
-                <!--<button type="button" value="0" class="calculator__key calculator__button"></button>-->
-                <!--<button type="button" value="." class="calculator__key calculator__button"></button>-->
-                <!--<button type="button" value="=" class="calculator__key calculator__key&#45;&#45;equal"></button>-->
-            <!--</div>-->
-        <!--</form>-->
-    <!--</div>-->
 </body>
 </html>
