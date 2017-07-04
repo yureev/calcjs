@@ -60,7 +60,6 @@ $(document).ready(function () {
             stack2 = [],
             i,
             input = display[0].value;
-        console.log(input[0]);
 
         for (i=0; i < input.length; i++) {
            if (input[i] === '0' || input[i] ==='1' || input[i] ==='2' || input[i] ==='3' || input[i] ==='4' || input[i] ==='5' || input[i] ==='6' || input[i] ==='7' || input[i] ==='8' || input[i] ==='9'){
@@ -68,14 +67,37 @@ $(document).ready(function () {
            } else if (input[i] === '(') {
                stack2.push(input[i]);
            } else if (input[i] === ')') {
-               var j;
-               for (j = stack2.lastIndexOf('(')+1; j < stack2.length; j++) {
+               var j = stack2.length-1;
+               while ( j>=0 && stack2[j] !== '(')  {
                    stack1.push(stack2[j]);
+                   stack2.pop();
+                   j--;
                }
-               stack2.splice( stack2.lastIndexOf('('));
+               stack2.pop();
 
-           } else stack2.push(input[i]);
-
+           } else if (input[i] === '*' || input[i] ==='/') {
+               var z = stack2.length-1;
+               while ( z >= 0 && (stack2[z] === '*' || stack2[z] === '/') ) {
+                   stack1.push(stack2[z]);
+                   stack2.pop();
+                   z--;
+               }
+               stack2.push(input[i]);
+           } else if (input[i] === '+' || input[i] ==='-') {
+               var y = stack2.length-1;
+               while ( y >= 0 && (stack2[y] === '+' || stack2[y] === '-' || stack2[y] === '*' || stack2[y] === '/') ) {
+                   stack1.push(stack2[y]);
+                   stack2.pop();
+                   y--;
+               }
+               stack2.push(input[i]);
+           } else alert ('error');
+        }
+        var x = stack2.length-1;
+        while (x >= 0) {
+            stack1.push(stack2[x]);
+            stack2.pop();
+            x--;
         }
         console.log(stack1, stack2);
 
