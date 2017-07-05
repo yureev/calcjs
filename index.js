@@ -1,3 +1,6 @@
+// Должен быть корректный ввод символов например: (6+(7-3)*5-4/2)*2
+
+
 $(document).ready(function () {
 
     var calc = $('.calculator');
@@ -53,15 +56,15 @@ $(document).ready(function () {
        result (display[0].value);
 
     });
-
+    // Реализовано с помощью обратной польской записи
     function result(input) {
-        var stack1 = [],
-            stack2 = [],
+        var stack1 = [], // Входной стэк
+            stack2 = [], // Стэк операций
             i,
-            err1 = 0,
-            err2 = 0;
+            err1 = 0, // Кол-во открытых скобок
+            err2 = 0; // Кол-во закрытых скобок
 
-        for (i=0; i < input.length; i++) {
+        for (i=0; i < input.length; i++) { // проверка на число
             if (input[i] === '0' || input[i] ==='1' || input[i] ==='2' || input[i] ==='3' ||
                 input[i] ==='4' || input[i] ==='5' || input[i] ==='6' || input[i] ==='7' ||
                 input[i] ==='8' || input[i] ==='9'){
@@ -75,10 +78,10 @@ $(document).ready(function () {
                 }
                 stack1.push(+input.slice(i,q));
                 i=q-1;
-            } else if (input[i] === '(') {
+            } else if (input[i] === '(') { // проверка на открывающую скобку
                 stack2.push(input[i]);
                 err1++;
-            } else if (input[i] === ')') {
+            } else if (input[i] === ')') { // проверка на закрывающую скобку
                 var j = stack2.length-1;
                 while ( j>=0 && stack2[j] !== '(')  {
                     stack1.push(stack2[j]);
@@ -88,7 +91,7 @@ $(document).ready(function () {
                 stack2.pop();
                 err2++;
 
-            } else if (input[i] === '*' || input[i] ==='/') {
+            } else if (input[i] === '*' || input[i] ==='/') { // Прорверка на знаки высокого приоритета
                 var z = stack2.length-1;
                 while ( z >= 0 && (stack2[z] === '*' || stack2[z] === '/') ) {
                     stack1.push(stack2[z]);
@@ -96,7 +99,7 @@ $(document).ready(function () {
                     z--;
                 }
                 stack2.push(input[i]);
-            } else if (input[i] === '+' || input[i] ==='-') {
+            } else if (input[i] === '+' || input[i] ==='-') {  // Прорверка на знаки низкого приоритета
                 if (input[i] ==='-' && !(input[i-1] === '0' || input[i-1] ==='1' || input[i-1] ==='2' ||
                     input[i-1] ==='3' || input[i-1] ==='4' || input[i-1] ==='5' || input[i-1] ==='6' ||
                     input[i-1] ==='7' || input[i-1] ==='8' || input[i-1] ==='9') ) {
@@ -121,7 +124,7 @@ $(document).ready(function () {
         }
 
         var t = 2;
-        while (t < stack1.length) {
+        while (t < stack1.length) { // Вычисление результата
             if (stack1[t] === '*') {
                 stack1[t-2] = (stack1[t-2] * stack1[t-1]);
                 stack1.splice(t-1,2);
@@ -143,7 +146,7 @@ $(document).ready(function () {
             }
         }
         display[0].value = stack1[0];
-        if (err1 !== err2) {
+        if (err1 !== err2) { // Элементарная проверка на ошибки
             alert('Несовпадение кол-ва открывающих и закрывающих скобок')
             display[0].value = '';
         }
